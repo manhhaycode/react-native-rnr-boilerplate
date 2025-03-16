@@ -1,0 +1,17 @@
+---
+description: This rule to create coding conversion and the agent must be follow this rule
+globs: 
+alwaysApply: true
+---
+
+# Your rule content
+- Anything related api, fetching data, type response, etc must placed in api folder (/api in root folder) and structured as each feature
+    - Each feature ([feature-name]) api must be follow the structure:
+        + Create folder with the name is [feature-name]
+        + types/index.ts in feature folder to store interface/type of request/response of feature
+        + [feature-name].api.ts in feature folder to store functions fetch api through axios and the create functions wrappped function fetch base on tanstack-query (useQuery or useMutation base on operation type/ usecase) with argument is the option or query fucntion or muatation function. (import * as httpRequest from '@/libs/axios') use httpRequest to call get, post, put method.
+
+        
+- This project using mockapi.io as a server backend, must use the interface/type in [index.ts](mdc:types/index.ts) as to generic to wrap the response data, the agent can update it to suitable with the response type common from mockapi.io
+
+- The new screen must be placed as the stack or Tab.Screen in [_layout.tsx](mdc:app/_layout.tsx) or [_layout.tsx](mdc:app/(tabs), each screen in app route just store data, fetch then pass props to components in (components from /components/screens/[feature-screen]), not include handle logical.
