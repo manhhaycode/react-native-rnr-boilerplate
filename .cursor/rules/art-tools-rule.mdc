@@ -1,17 +1,60 @@
 ---
-description: This rule to create coding conversion and the agent must be follow this rule
+description: 
 globs: 
 alwaysApply: true
 ---
+# Art Tools Project Coding Rules
 
-# Your rule content
-- Anything related api, fetching data, type response, etc must placed in api folder (/api in root folder) and structured as each feature
-    - Each feature ([feature-name]) api must be follow the structure:
-        + Create folder with the name is [feature-name]
-        + types/index.ts in feature folder to store interface/type of request/response of feature
-        + [feature-name].api.ts in feature folder to store functions fetch api through axios and the create functions wrappped function fetch base on tanstack-query (useQuery or useMutation base on operation type/ usecase) with argument is the option or query fucntion or muatation function. (import * as httpRequest from '@/libs/axios') use httpRequest to call get, post, put method.
+## API Structure
+- All API-related code must be placed in the `/api` folder and structured by feature
+  - Each feature (`[feature-name]`) must follow this structure:
+    - Create folder with the name `[feature-name]`
+    - `types/index.ts` to store interfaces/types for request/response
+    - `[feature-name].api.ts` to store API functions using axios and TanStack Query
+    - Import httpRequest from '@/libs/axios' for API calls (get, post, put methods)
 
-        
-- This project using mockapi.io as a server backend, must use the interface/type in [index.ts](mdc:types/index.ts) as to generic to wrap the response data, the agent can update it to suitable with the response type common from mockapi.io
+## Component Structure
+- UI components should be placed in `/components` folder
+- Feature-specific components should be in `/components/screens/[feature-name]`
+- Reusable UI components should use the RNR UI library pattern
+- Components should accept props for data and callbacks, not handle business logic directly
 
-- The new screen must be placed as the stack or Tab.Screen in [_layout.tsx](mdc:app/_layout.tsx) or [_layout.tsx](mdc:app/(tabs), each screen in app route just store data, fetch then pass props to components in (components from /components/screens/[feature-screen]), not include handle logical.
+## Animation Standards
+- Use React Native Reanimated for animations
+- Entry animations should use FadeIn/FadeInDown with staggered delays for lists
+- Interactive elements should have press animations using withSpring
+- Provide haptic feedback for important interactions using the useHaptics hook
+
+## State Management
+- Use Zustand with AsyncStorage persistence for global state that needs to persist
+- Use TanStack Query for server state management
+- Use local React state for component-specific UI state
+
+## UI/UX Guidelines
+- Use the existing design system with proper spacing and typography
+- Cards should have consistent styling with overflow hidden and proper padding
+- Use Badge components for highlighting features (like glassSurface compatibility)
+- Rating components should use the RatingStars component with proper configuration
+- Lists should use FlashList for performance with proper estimatedItemSize
+
+## Navigation
+- New screens must be placed as Stack or Tab.Screen in app/_layout.tsx or app/(tabs)/_layout.tsx
+- Screen components should focus on data fetching and passing props to presentation components
+
+## Image Handling
+- Use Image component with proper resizeMode
+- Implement loading states for images
+- Consider implementing image caching for performance
+
+## Error and Loading States
+- Always implement loading states using ActivityIndicator
+- Provide empty states for lists when no data is available
+- Handle errors gracefully with user-friendly messages
+
+## Naming Conventions
+- Component files should be PascalCase (e.g., ArtToolCard.tsx)
+- Hook files should be camelCase and prefixed with "use" (e.g., useHaptics.ts)
+- API files should be kebab-case with .api.ts suffix (e.g., art-tools.api.ts)
+- Type files should be in types/index.ts within feature folders
+
+
