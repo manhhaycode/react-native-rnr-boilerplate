@@ -81,11 +81,18 @@ export default function DetailScreen() {
 
   return (
     <>
+      <Button
+        hitSlop={20}
+        style={{ top }}
+        variant="ghost"
+        size="icon"
+        onPress={() => router.back()}
+        className="absolute left-4 z-20 rounded-full opacity-80"
+      >
+        <ArrowLeft size={24} className="text-foreground" />
+      </Button>
       <Animated.View style={headerAnimatedStyle} className="absolute left-0 right-0 z-10 px-4 border-b border-border">
-        <View style={{ marginTop: top }} className="flex-row items-center">
-          <Button variant="ghost" size="icon" onPress={() => router.back()} className="mr-2">
-            <ArrowLeft size={24} className="text-foreground" />
-          </Button>
+        <View style={{ marginTop: top }} className="flex-row items-center ml-12">
           <Text className="flex-1 text-lg font-medium" numberOfLines={1}>
             {artTool.artName}
           </Text>
@@ -93,13 +100,6 @@ export default function DetailScreen() {
         </View>
       </Animated.View>
       <SafeAreaView className="flex-1 bg-background">
-        {/* Back Button (visible when scrolled to top) */}
-        <View className="absolute top-10 left-4 z-20">
-          <Button variant="secondary" size="icon" onPress={() => router.back()} className="rounded-full opacity-80">
-            <ArrowLeft size={24} className="text-foreground" />
-          </Button>
-        </View>
-
         <Animated.ScrollView
           onScroll={scrollHandler}
           scrollEventThrottle={16}
